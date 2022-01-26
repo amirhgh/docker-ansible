@@ -1,0 +1,15 @@
+---
+  - name: Remove old version of docker
+    yum:
+      name: "{{ packages_to_remove_yum }}"
+      state: absent
+
+  - name: Install requiered package
+    yum:
+      name: yum-utils
+      state: present
+  
+  - name: Add repo
+    shell: yum-config-manager --add-repo "{{ docker_yum_repo_url }}"
+    become: true
+  

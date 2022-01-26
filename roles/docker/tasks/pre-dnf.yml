@@ -1,0 +1,15 @@
+---
+  - name: Remove old version of docker
+    dnf:
+      name: "{{ packages_to_remove_dnf }}"
+      state: absent
+
+  - name: Install requiered package
+    dnf:
+      name: dnf-plugins-core
+      state: present
+
+  - name: Add repo
+    shell: dnf config-manager --add-repo "{{ docker_yum_repo_url }}"
+    become: true
+  

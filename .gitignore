@@ -1,0 +1,6 @@
+
+*.retry
+
+venv
+inventory.ini
+play.yml

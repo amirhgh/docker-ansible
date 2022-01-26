@@ -1,0 +1,21 @@
+---
+  - name: Remove old version of docker
+    apt: 
+      name: "{{ packages_to_remove_apt }}"
+      state: absent
+
+  - name: Install requiered 
+    apt:
+      name: "{{ packages_to_install_apt }}"
+      state: present
+
+  - name: Add Docker apt key.
+    apt_key:
+      url: "{{ docker_apt_gpg_key }}"
+      state: present
+
+  - name: Add Docker repository.
+    apt_repository:
+      repo: "{{ docker_apt_repository }}"
+      state: present
+      update_cache: true

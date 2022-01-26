@@ -1,0 +1,48 @@
+---
+# defaults file for docker
+packages_to_remove_apt: 
+  - docker
+  - docker-engine
+  - docker.io
+  - containerd
+  - runc
+  
+packages_to_remove_dnf:
+  - docker
+  - docker-client
+  - docker-client-latest
+  - docker-common 
+  - docker-latest
+  - docker-latest-logrotate
+  - docker-logrotate
+  - docker-selinux
+  - docker-engine-selinux
+  - docker-engine
+
+packages_to_remove_yum:
+  - docker 
+  - docker-client 
+  - docker-client-latest 
+  - docker-common 
+  - docker-latest 
+  - docker-latest-logrotate 
+  - docker-logrotate 
+  - docker-engine
+
+packages_to_install_apt:
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+
+docker_packages: 
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+
+docker_repo_url: https://download.docker.com/linux
+docker_apt_repository: "deb [arch=amd64] {{ docker_repo_url }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
+docker_apt_gpg_key: "{{ docker_repo_url }}/{{ ansible_distribution | lower }}/gpg"
+
+docker_yum_repo_url: "{{ docker_repo_url }}/{{ (ansible_distribution == 'Fedora') | ternary('fedora','centos') }}/docker-ce.repo"
+docker_yum_gpg_key: "{{ docker_repo_url }}/centos/gpg"

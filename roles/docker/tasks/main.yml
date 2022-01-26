@@ -1,0 +1,21 @@
+---
+  - name: Check installed packages
+    package_facts:
+      manager: auto
+  
+  - include_tasks: pre-apt.yml
+    when: (ansible_pkg_mgr == 'apt' and 'docker-ce' not in ansible_facts.packages)
+
+  - include_tasks: pre-yum.yml
+    when: (ansible_pkg_mgr == 'yum' and 'docker-ce' not in ansible_facts.packages)
+
+  - include_tasks: pre-dnf.yml
+    when: (ansible_pkg_mgr == 'dnf' and 'docker-ce' not in ansible_facts.packages)
+
+  - name: Install Docker
+    package:
+      name: "{{ docker_packages }}"
+      state: present
+    notify: restart docker
+    when: "'docker-ce' not in ansible_facts.packages"
+

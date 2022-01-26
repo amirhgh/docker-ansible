@@ -1,0 +1,14 @@
+galaxy_info:
+  author: Amir Ghafari
+  description: Simple ansbile role for install docker
+
+  license: license (BSD, Apache-2.0)
+
+  min_ansible_version: 2.4
+
+
+  galaxy_tags:
+    - containers
+    - docker
+
+dependencies: []
