@@ -7,5 +7,9 @@ A simple Ansible Role to install [Docker](https://www.docker.com) on any Linux
 ```
 ansible-playbook -i inventory.ini -b play.yml
 ```
-
+# Support variables
+to force install docker or update docker version use
+```
+force_to_install=true
+```
 [@dwsclass](https://github.com/dwsclass/) dws-ops-003-ansible
