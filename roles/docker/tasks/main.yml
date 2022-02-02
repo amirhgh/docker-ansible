@@ -17,5 +17,4 @@
       name: "{{ docker_packages }}"
       state: present
     notify: restart docker
-    when: "'docker-ce' not in ansible_facts.packages"
-
+    when: "'docker-ce' not in ansible_facts.packages or force_to_install"

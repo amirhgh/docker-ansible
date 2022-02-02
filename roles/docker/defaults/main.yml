@@ -1,5 +1,7 @@
 ---
 # defaults file for docker
+force_to_install: false
+update_docker: false
 packages_to_remove_apt: 
   - docker
   - docker-engine
