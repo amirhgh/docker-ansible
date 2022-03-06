@@ -1,6 +1,6 @@
 # Ansible Docker
 
-A simple Ansible Role to install [Docker](https://www.docker.com) on any Linux
+A simple Ansible Role to install [Docker](https://www.docker.com) and docker-compose on any Linux
 
 ## How to work 
 
