@@ -1,0 +1,39 @@
+---
+# tasks file for docker-compose
+- name: Step-1 | Check installed packages
+  package_facts:
+    manager: "auto"
+
+- assert: 
+    that:
+      - "'docker-ce' in ansible_facts.packages"
+    fail_msg: "Docker engine is not installed"
+
+- name: Step-2 | Check docker-compose version
+  shell: docker-compose --version
+  register: version
+  ignore_errors: true
+
+- name: Step-3 | Install docker-compes
+  shell: curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}" -o /usr/local/bin/docker-compose
+  become: true
+  when: (version.failed or force_to_install)
+
+- name: Step-4 | Add permission
+  file: 
+    mode: "+x"
+    path: "/usr/local/bin/docker-compose"
+  become: true
+  when: (version.failed or force_to_install)
+
+- name: Step-5.1 | Check correct installation 
+  shell: docker-compose --version
+  register: version
+  ignore_errors: true
+
+- name: Step-5.2 | Create soft link
+  file:
+    state: link
+    src: /usr/local/bin/docker-compose
+    dest: /usr/bin/docker-compose
+  when: version.rc!=0

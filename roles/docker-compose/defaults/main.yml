@@ -1,0 +1,3 @@
+---
+# defaults file for docker-compose
+force_to_install: false
